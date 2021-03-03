@@ -1,6 +1,9 @@
-import React from "./deps/react.ts";
-import ReactDomServer from "./deps/react-dom/server.ts";
-import { Webview } from "./deps/webview.ts";
+// @deno-types="https://denopkg.com/soremwar/deno_types/react/v16.13.1/react.d.ts"
+import React from "https://dev.jspm.io/react@17.0.1";
+// @deno-types="https://denopkg.com/soremwar/deno_types/react-dom/v16.13.1/server.d.ts"
+import ReactDomServer from "https://dev.jspm.io/react-dom@17.0.1/server";
+
+import { Webview } from "https://deno.land/x/webview/mod.ts";;
 
 import App from "./app.tsx";
 
@@ -14,7 +17,6 @@ async function main(): Promise<void> {
     });
     const bundle = result.files["deno:///bundle.js"];
 
-    //@ts-ignore
     const body = ReactDomServer.renderToString(
       <App />
     );
@@ -37,8 +39,8 @@ async function main(): Promise<void> {
     const webview = new Webview(
       { url: `data:text/html,${encodeURIComponent(html)}` },
     );
+
     await webview.run();
-    // console.log(html)
   } catch (error) {
     console.error(error);
   }
